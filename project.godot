@@ -26,6 +26,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="cove-rush"
 
+[global_group]
+
+cargo_segments="categorize both boat and cargo to clear queue"
+
 [input]
 
 move_up={
