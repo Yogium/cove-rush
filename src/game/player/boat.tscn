@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b42u3sxq0cmsv"]
+
+[ext_resource type="Texture2D" uid="uid://bmrc3vq75gf7p" path="res://assets/temp_assets/boat.webp" id="1_my0c0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyhgu"]
+size = Vector2(11, 11)
+
+[node name="Boat" type="StaticBody2D" unique_id=1119346163]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1657147765]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_fyhgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1212681075 groups=["cargo_segments"]]
+position = Vector2(8, 8)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_my0c0")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=556372799 groups=["cargo_segments"]]
+position = Vector2(8, 8)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0

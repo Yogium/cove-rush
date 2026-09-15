@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cdjvid6ykua47"]
+
+[ext_resource type="Script" uid="uid://2kwtk8e7ej12" path="res://src/game/core/game_mechanic.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://b42u3sxq0cmsv" path="res://src/game/player/boat.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cda1qrlqpq1j1" path="res://src/game/player/cargo.tscn" id="3_iywne"]
+
+[node name="Game" type="Node2D" unique_id=2094625336]
+script = ExtResource("1_uwrxv")
+boat_scene = ExtResource("2_lbhrr")
+cargo_scene = ExtResource("3_iywne")
+boat_speed = 8.0
+
+[node name="Ocean_Background" type="Sprite2D" parent="." unique_id=1200699698]
+visible = false
+z_index = -5
+position = Vector2(160, 160)
+scale = Vector2(0.32, 0.32)
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=931857443]
+
+[node name="Floating_Cargo" type="Sprite2D" parent="." unique_id=264335609]
+position = Vector2(1.4210855e-14, 1.4210855e-14)
+scale = Vector2(0.014, 0.014)
+centered = false
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
