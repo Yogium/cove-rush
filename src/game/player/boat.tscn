@@ -1,22 +1,28 @@
 [gd_scene format=3 uid="uid://b42u3sxq0cmsv"]
 
+[ext_resource type="Script" uid="uid://b374ne6oxgl5p" path="res://src/game/core/boat_movement.gd" id="1_eohn5"]
 [ext_resource type="Texture2D" uid="uid://bmrc3vq75gf7p" path="res://assets/temp_assets/boat.webp" id="1_my0c0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyhgu"]
 size = Vector2(11, 11)
 
-[node name="Boat" type="StaticBody2D" unique_id=1119346163]
+[node name="Boat" type="Node2D" unique_id=154592715 groups=["cargo_segments"]]
+script = ExtResource("1_eohn5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1657147765]
+[node name="Area2D" type="Area2D" parent="." unique_id=2079350039]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1700560327]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_fyhgu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1212681075 groups=["cargo_segments"]]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=792547194]
 position = Vector2(8, 8)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("1_my0c0")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=556372799 groups=["cargo_segments"]]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1842713964]
 position = Vector2(8, 8)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_boat_collision"]

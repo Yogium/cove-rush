@@ -11,14 +11,14 @@ var game_start: bool = false
 #@export var grid_length: int = 20 #map length in grid
 
 #rectangular?
-@export var grid_length_x: int = 50
-@export var grid_length_y: int = 50
-
+@export var grid_length_x: int = 15
+@export var grid_length_y: int = 15
 
 @export var grid_sizepx: int = 16 #px size of 1 grid
 
 # spawnpoint middle
-@export var spawnpoint = Vector2(floor(grid_length_x/2),floor(grid_length_y/2)) #grid coordiantes where the boat spawns
+@export var spawnpoint = Vector2(floor(grid_length_x/2),floor(grid_length_y/2)) 
+#grid coordiantes where the boat spawns
 
 var boat: Array #store the scene holding the boat and the cargo
 var cur_boat_pos: Array #store current grid coordinates for each segments
@@ -57,13 +57,14 @@ func new_game():
 	get_tree().paused = false
 	get_tree().call_group("cargo_segments", "queue_free")
 	buffer_reset()
+	$Interface.hide()
 	$MoveTimer.wait_time = boat_speed
 	move_direction = Vector2(0,0)
 	can_move = true
 	Engine.time_scale = 1
 	
 	#scale boat and cargo size fitting 16 px
-	
+	#---
 	spawn_boat()
 	move_cargo()
 
@@ -102,7 +103,6 @@ func spawn_boat():
 	boat.clear()
 	cur_boat_pos.clear()
 	old_boat_pos.clear()
-	
 	add_boat_head(spawnpoint + Vector2(0,0))
 
 func add_boat_head(pos):
@@ -128,22 +128,52 @@ func add_cargo_segment(pos):
 	boat.append(CargoSegment)	
 	boat_length = len(boat)-1 
 	print("Boat Length: "+str(boat_length))
-	
+
+func sell_cargo_segment(amount):
+	print("Selling " + str(amount) + " Cargo...")
+	for i in range(amount):
+		boat.pop_back()
+		cur_boat_pos.pop_back()
+		old_boat_pos.pop_back()
+
+#SHOP FUNCTION
+var shop_opened: bool = false
+func open_shop():
+	print("Open Shop")
+	Engine.time_scale = 0
+	shop_opened = true
+	$Interface.show()
+
+func close_shop():
+	print("Close Shop")
+	Engine.time_scale = 1
+	shop_opened = false
+	$Interface.hide()
+
+func shop_keybind():
+	if Input.is_action_just_pressed("open_shop") and not shop_opened:
+		open_shop()
+	elif Input.is_action_just_pressed("open_shop") and shop_opened:
+		close_shop()
+
+
+
 
 #BUFFER PROCESS
 func add_buffer_input(input):
 	if input != -move_direction:
 		buffer_queue.append(input)
-	
+
 func get_buffer_input():
 	return buffer_queue.pop_front()
-	
+
 func buffer_reset():
 	buffer_queue.clear()
-	
+
 #MOVEMENT PROCESS
 func _process(delta: float) -> void:
 	run_boat_movement()
+	shop_keybind()
 
 func _physics_process(delta: float) -> void:
 	if not game_start:
@@ -156,7 +186,6 @@ func _physics_process(delta: float) -> void:
 		#await get_tree().create_timer(buffer_timer).timeout
 		#buffer_reset()
 
-	
 
 #func _on_move_timer_timeout() -> void:
 func print_direction_in_text(input):
@@ -194,7 +223,6 @@ func update_boat():
 	check_border()
 
 func run_boat_movement():
-	
 	#movement to disallow opposite direction
 	if Input.is_action_just_pressed("move_down") and move_direction != up:
 		move_direction = down

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cda1qrlqpq1j1"]
+
+[ext_resource type="Script" uid="uid://o6pky38wytt6" path="res://src/game/core/cargo_segments.gd" id="1_eiqmc"]
+[ext_resource type="Texture2D" uid="uid://cr366e4uqyeld" path="res://assets/temp_assets/crate.png" id="1_p77eo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rto1"]
+size = Vector2(24.858482, 23.961304)
+
+[node name="Cargo" type="Node2D" unique_id=121253024 groups=["cargo_segments"]]
+script = ExtResource("1_eiqmc")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=609128427]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1546863427]
+position = Vector2(8, 8)
+scale = Vector2(0.64252746, 0.6677433)
+shape = SubResource("RectangleShape2D_4rto1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=293534224]
+position = Vector2(8, 8)
+scale = Vector2(0.027, 0.027)
+texture = ExtResource("1_p77eo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_cargo_collision"]
