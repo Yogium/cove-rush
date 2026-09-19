@@ -142,6 +142,7 @@ func open_shop():
 	print("Open Shop")
 	Engine.time_scale = 0
 	shop_opened = true
+	shop_randomizer()
 	$Interface.show()
 
 func close_shop():
@@ -158,6 +159,73 @@ func shop_keybind():
 
 
 
+
+#SHOP OPTION RANDOMIZER
+var shop_products: Array = [
+	["p1", "ADD TIME"],
+	["p2", "ADD SPEED"],
+	["p3", "MORE CRATE LENGTH"],
+	["p4", "LOOP MORE"],
+	["p5", "UNDYING"],
+]
+
+var opt1
+var opt2
+func shop_randomizer():
+	shop_products.shuffle()
+	opt1 = shop_products[0]
+	opt2 = shop_products[1]
+	
+	set_option_1()
+	set_option_2()
+	
+	print(str(opt1),str(opt2))
+
+func set_option_1():
+	$Interface/Shop_Interface/Panel/Option1/ChoiceText1.text = opt1[1]
+
+func set_option_2():
+	$Interface/Shop_Interface/Panel/Option2/ChoiceText2.text = opt2[1]
+
+func _shop_option_1() -> void:
+	if opt1[0] == "p1":
+		p1_option()
+	elif opt1[0] == "p2":
+		p2_option()
+	elif opt1[0] == "p3":
+		p3_option()
+	elif opt1[0] == "p4":
+		p4_option()
+	elif opt1[0] == "p5":
+		p5_option()
+		
+func _shop_option_2() -> void:
+	if opt2[0] == "p1":
+		p1_option()
+	elif opt2[0] == "p2":
+		p2_option()
+	elif opt2[0] == "p3":
+		p3_option()
+	elif opt2[0] == "p4":
+		p4_option()
+	elif opt2[0] == "p5":
+		p5_option()
+
+#SHOP POWERUPS
+func p1_option():
+	pass
+
+func p2_option():
+	pass
+
+func p3_option():
+	pass
+
+func p4_option():
+	pass
+
+func p5_option():
+	pass
 
 #BUFFER PROCESS
 func add_buffer_input(input):

@@ -26,3 +26,5 @@ centered = false
 [node name="Shop_Interface" parent="Interface" unique_id=1584239057 instance=ExtResource("5_i6dnw")]
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="option1" from="Interface/Shop_Interface" to="." method="_shop_option_1"]
+[connection signal="option2" from="Interface/Shop_Interface" to="." method="_shop_option_2"]
