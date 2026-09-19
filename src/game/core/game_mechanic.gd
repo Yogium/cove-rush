@@ -213,19 +213,24 @@ func _shop_option_2() -> void:
 
 #SHOP POWERUPS
 func p1_option():
-	pass
+	print("RUN P1")
+	close_shop()
 
 func p2_option():
-	pass
+	print("RUN P2")
+	close_shop()
 
 func p3_option():
-	pass
+	print("RUN P3")
+	close_shop()
 
 func p4_option():
-	pass
+	print("RUN P4")
+	close_shop()
 
 func p5_option():
-	pass
+	print("RUN P5")
+	close_shop()
 
 #BUFFER PROCESS
 func add_buffer_input(input):
